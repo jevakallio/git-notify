@@ -3,11 +3,23 @@
 <strong>Communicate important updates to your team via git commit messages</strong>
 <br><br>
 
-![Demo](docs/demo.gif)
-
 ## What is git-notify?
 
-I've often ran into a situation where I'd like to communicate a piece of information.
+Sometimes you want to communicate about important changes, process improvements, new tools etc. to other developers on your project. In a small team, a Slack message will probably do the job, but in larger teams and distributed organizations (such as open source project), reaching everyone can be a pain.
+
+`git-notify` allows you to inject announcements into your git commit messages, that will be displayed to other developers when they pull the changes to their machine.
+
+```sh
+git commit -m 'git-notify: NEW PERF TOOLING AVAILABLE ...'
+```
+
+![Demo](docs/demo.gif)
+
+Or, instead of adding messages to individual commits, you can add them to the extended merge/squash commit message on GitHub:
+
+![GitHub PR flow example](docs/github-example.png)
+
+You can change the prefix [git-notify] uses. See [Configuration](#configuration) for how to do this.
 
 ## Getting started
 
@@ -90,6 +102,53 @@ npx git-notify --help
      $ git-notify checkout $GIT_PARAMS
 ```
 
+## About formatting
+
+`git-notify` will display a message for every "git-notify:" prefix it finds in the commit log that was just pulled/merged/rebased/checked out. **The notification message will be the rest of the paragraph following the prefix.** Whitespace will be preserved.
+
+For example, this commit message:
+
+```
+This change upgrades some of our dependencies. git-notify: Please run npm install
+```
+
+Will print:
+
+```
+            ╒════════════════════════════╕
+            │                               │
+            │    Please run npm install     │
+            │                               │
+            ╘════════════════════════════╛
+```
+
+Or:
+
+````
+Rewrite everything.
+
+git-notify:EVERYTHING HAS CHANGED
+This project has been rewritten
+from scratch. If something broke,
+please contact Jeff at dev@null.com.
+```
+
+Will display:
+```
+         ╒══════════════════════════════════════════╕
+         │                                              │
+         │            EVERYTHING HAS CHANGED            │
+         │       This project has been rewritten        │
+         │      from scratch. If something broke,       │
+         │     please contact Jeff at dev@null.com.     │
+         │                                              │
+         ╘══════════════════════════════════════════╛
+
+
+### Can I group messages
+
+Not at the moment, but this should not be difficult to add. See [Contributing](#contributing)
+
 ## Git Hooks
 
 ### Installing with husky
@@ -119,8 +178,6 @@ At this time, `git-notify` is a node-based project. While I recognize it could b
 
 If you like this idea, feel free to steal it and implement your own version for other toolsets!
 
-## Configuration
-
 ## Contributing
 
 This project is open to contributions. For anything that would radically change the nature of the project or increase its maintenance burden, please open an issue first to discuss.
@@ -133,7 +190,7 @@ To run TSDX, use:
 
 ```bash
 yarn start
-```
+````
 
 This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
 
