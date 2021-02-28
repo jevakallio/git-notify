@@ -16,8 +16,6 @@ Later, at a machine far far away:
 
 <img src="https://github.com/jevakallio/git-notify/blob/master/docs/demo.gif?raw=true" alt="GitHub PR flow example"></img>
 
-![Demo](docs/demo.gif)
-
 Simple as that.
 
 ## How to use git-notify?
