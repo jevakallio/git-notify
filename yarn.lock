@@ -1680,11 +1680,6 @@ anymatch@^3.0.3, anymatch@~3.1.1:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-applescript@~0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/applescript/-/applescript-0.2.1.tgz#cbedbc5399006b0151cfdbbef560bfb491a4960e"
-  integrity sha1-y+28U5kAawFRz9u+9WC/tJGklg4=
-
 aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
@@ -3088,7 +3083,7 @@ des.js@^1.0.0:
     inherits "^2.0.1"
     minimalistic-assert "^1.0.0"
 
-detect-newline@^3.0.0:
+detect-newline@^3.0.0, detect-newline@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
   integrity sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==
@@ -5939,13 +5934,6 @@ node-notifier@^6.0.0:
     semver "^6.3.0"
     shellwords "^0.1.1"
     which "^1.3.1"
-
-node-notify@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/node-notify/-/node-notify-1.0.0.tgz#7c96e96c8790868ade943fb025c2ae1e74227e73"
-  integrity sha1-fJbpbIeQhorelD+wJcKuHnQifnM=
-  dependencies:
-    applescript "~0.2.1"
 
 node-releases@^1.1.70:
   version "1.1.71"
