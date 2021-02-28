@@ -42,7 +42,7 @@ const cli = meow(
       color: {
         type: 'string',
         alias: 'c',
-        default: 'cyan',
+        default: '#ff6f6f',
         description:
           'hex value like #ff0000, or one of: black, red, green, yellow, blue, magenta, cyan, white, gray',
       },
