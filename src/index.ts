@@ -31,7 +31,8 @@ const cli = meow(
 
 	Examples
     $ git-notify since HEAD~5
-    $ git-notify checkout $GIT_PARAMS
+    $ git-notify checkout $GIT_PARAMS --prefix "\@everyone:"
+    $ git-notify merge $GIT_PARAMS --simple --color "\#ff6f6f"
 `,
   {
     flags: {

@@ -1,19 +1,138 @@
-# TSDX User Guide
+<h1 align="center">git-notify</h1>
+<p align="center">
+<strong>Communicate important updates to your team via git commit messages</strong>
+<br><br>
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+![Demo](docs/demo.gif)
 
-> This TSDX setup is meant for developing libraries (not apps!) that can be published to NPM. If you’re looking to build a Node app, you could use `ts-node-dev`, plain `ts-node`, or simple `tsc`.
+## What is git-notify?
 
-> If you’re new to TypeScript, checkout [this handy cheatsheet](https://devhints.io/typescript)
+I've often ran into a situation where I'd like to communicate a piece of information.
 
-## Commands
+## Getting started
 
-TSDX scaffolds your new library inside `/src`.
+Install the git-notify package as a devDependency to your project:
+
+```bash
+# using npm
+npm install --save-dev git-notify
+
+# using yarn
+yarn add -D git-notify
+```
+
+You'll need to install [git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to run `git-notify` automatically when other developers pull commits that contain git messages.
+
+Below we show how to install them with the excellent [husky](https://github.com/typicode/husky) node library. For other approaches, see the [Git Hooks](#git-hooks) section.
+
+### Installing hooks with husky
+
+```
+# using npm
+npm install --save-dev husky@4
+
+# using yarn
+yarn add -D husky@4
+```
+
+Configure `git-notify` hooks by adding the following `husky` entries to your `package.json`:
+
+```json
+{
+  //...snip
+  "husky": {
+    "hooks": {
+      "post-merge": "git-notify merge $HUSKY_GIT_PARAMS",
+      "post-rewrite": "git-notify rewrite $HUSKY_GIT_PARAMS",
+      "post-checkout": "git-notify checkout $HUSKY_GIT_PARAMS"
+    }
+  }
+}
+```
+
+**Note:** The above instructions below are for [husky v4.x](https://github.com/typicode/husky/tree/master). Husky v5 changes how hooks are configured, as well changes its licensing terms to be free only to other open source projects. See [husky's own documentation](https://dev.to/typicode/what-s-new-in-husky-5-32g5) for how to configure hooks in their latest version.
+
+## Configuration
+
+- `--prefix "\@team:"`
+  - Change the prefix `git-notify` looks for in git commit messages
+  - You'll need to take care of escaping any special characters that may be interpreted by your shell, `!`, `@`, etc...
+  - Default: `git-notifier:`
+- `--color "ff6f6f"`
+  - Change the color of the banner
+  - This can be one of the [`chalk` preset colors](https://www.npmjs.com/package/chalk#colors) or a HEX value. If using HEX value, you can either include or omit the leading `#` character.
+- `--simple`
+  - Instead of a fancy banner, displays a simple text message
+
+### All parameters
+
+Run `npx git-notify --help` for an up to date list of parameters:
+
+```sh
+npx git-notify --help
+
+  Usage
+    $ git-notify <method> [options] $GIT_PARAMS
+
+   Methods
+     since <commit>  show all notifications since commit
+     merge           run on git pull/merge
+     rewrite         run on git rebase
+     checkout        run on git checkout/switch
+
+  Options
+     --prefix, -p    prefix to  look for in commit messages (default: "git-notify:")
+     --simple, -s    show a plain, unboxed notification
+     --color, -c     color of displayed notification
+
+  Examples
+     $ git-notify since HEAD~5
+     $ git-notify checkout $GIT_PARAMS
+```
+
+## Git Hooks
+
+### Installing with husky
+
+See [Installing hooks with husky](#installing-hooks-with-husky) in the Getting Started section.
+
+### Installing hooks by any other means
+
+`git-notify` is agnostic to however you want to install your git hooks.
+
+The hooks you need to configure are:
+
+- **post-merge** (runs on `git pull` and `git merge`)
+  - `npx git-notify merge $GIT_PARAMS`
+- **post-rewrite** (runs on `git rebase`)
+  - `npx git-notify rewrite $GIT_PARAMS`
+- **post-checkout** (runs on `git checkout` -- optional, but useful)
+  - `npx git-notify checkout $GIT_PARAMS`
+
+At the time of writing, `git-notify checkout` is the only hook that uses the arguments (`$GIT_PARAMS`) passed to the git hook, but ideally you should always pass the arguments to `git-notify`, in case we'll need to use them in a later version.
+
+See [githooks.com](https://githooks.com/) for more resources on the topic. Documentation for different approaches are welcome!
+
+### Installing git-notify without npm
+
+At this time, `git-notify` is a node-based project. While I recognize it could be useful in other types of projects (ruby, python, rust, etc...), cross-platform scripting sucks, and this project is not interested in solving those problems at this time.
+
+If you like this idea, feel free to steal it and implement your own version for other toolsets!
+
+## Configuration
+
+## Contributing
+
+This project is open to contributions. For anything that would radically change the nature of the project or increase its maintenance burden, please open an issue first to discuss.
+
+### Local development
+
+This project is written in TypeScript and scaffolded using [tsdx](https://github.com/formium/tsdx).
 
 To run TSDX, use:
 
 ```bash
-npm start # or yarn start
+yarn start
 ```
 
 This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
@@ -22,82 +141,6 @@ To do a one-off build, use `npm run build` or `yarn build`.
 
 To run tests, use `npm test` or `yarn test`.
 
-## Configuration
+## LICENSE
 
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
-
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`.
-
-### Bundle Analysis
-
-[`size-limit`](https://github.com/ai/size-limit) is set up to calculate the real cost of your library with `npm run size` and visualize the bundle with `npm run analyze`.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```txt
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
-```
-
-### Rollup
-
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
-
-### TypeScript
-
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
-
-## Continuous Integration
-
-### GitHub Actions
-
-Two actions are added by default:
-
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
-- `size` which comments cost comparison of your library on every pull request using [`size-limit`](https://github.com/ai/size-limit)
-
-## Optimizations
-
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
-
-```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
-
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
-}
-```
-
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
-
-## Module Formats
-
-CJS, ESModules, and UMD module formats are supported.
-
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
-
-## Named Exports
-
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
-
-## Including Styles
-
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
-
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
-
-## Publishing to NPM
-
-We recommend using [np](https://github.com/sindresorhus/np).
+[MIT](LICENSE)
