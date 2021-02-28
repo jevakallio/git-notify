@@ -17,7 +17,7 @@
   ],
   "files": [
     "dist",
-    "src"
+    "bin"
   ],
   "engines": {
     "node": ">=10"
