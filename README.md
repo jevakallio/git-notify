@@ -5,25 +5,26 @@
 
 ## What is git-notify?
 
-Sometimes you want to communicate about important changes, process improvements, new tools etc. to other developers on your project. In a small team, a Slack message will probably do the job, but in larger teams and distributed organizations (such as open source project), reaching everyone can be a pain.
+Sometimes you need to communicate about important changes to other developers on your project. In a small team, a Slack message will probably do, but in larger teams and distributed organizations (such as open source projects), reaching everyone can be a pain.
 
-`git-notify` allows you to inject announcements into your git commit messages, that will be displayed to other developers when they pull the changes to their machine.
+`git-notify` allows you to inject announcements into your git commit messages, and display them to other developers when they pull those commits to their machine.
 
 ```sh
 git commit -m 'git-notify: NEW PERF TOOLING AVAILABLE ...'
 ```
 
+Later, at a machine far far away:
 ![Demo](docs/demo.gif)
 
-Or, instead of adding messages to individual commits, you can add them to the extended merge/squash commit message on GitHub:
+If you're using merge/squash commit strategy on GitHub, you can add them to the extended commit message when landing a PR:
 
 ![GitHub PR flow example](docs/github-example.png)
 
-You can change the prefix [git-notify] uses. See [Configuration](#configuration) for how to do this.
-
 ## Getting started
 
-Install the git-notify package as a devDependency to your project:
+`git-notify` is intended for use in node-based projects.
+
+Install the git-notify package as a devDependency:
 
 ```bash
 # using npm
@@ -33,9 +34,7 @@ npm install --save-dev git-notify
 yarn add -D git-notify
 ```
 
-You'll need to install [git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to run `git-notify` automatically when other developers pull commits that contain git messages.
-
-Below we show how to install them with the excellent [husky](https://github.com/typicode/husky) node library. For other approaches, see the [Git Hooks](#git-hooks) section.
+Next, we'll configure `git-notify` to run automatically when other developers pull commits that contain git messages. Below we show how to install them with the excellent [husky](https://github.com/typicode/husky) node library. For other approaches, see the [Git Hooks](#git-hooks) section.
 
 ### Installing hooks with husky
 
@@ -62,18 +61,17 @@ Configure `git-notify` hooks by adding the following `husky` entries to your `pa
 }
 ```
 
-**Note:** The above instructions below are for [husky v4.x](https://github.com/typicode/husky/tree/master). Husky v5 changes how hooks are configured, as well changes its licensing terms to be free only to other open source projects. See [husky's own documentation](https://dev.to/typicode/what-s-new-in-husky-5-32g5) for how to configure hooks in their latest version.
+_**Note:** The above instructions below are for [husky v4.x](https://github.com/typicode/husky/tree/master). Husky v5 has changed how hooks are configured, as well updated its licensing terms to be free only to other open source projects.See [husky's own documentation](https://dev.to/typicode/what-s-new-in-husky-5-32g5) for how to configure hooks in their latest version._
 
 ## Configuration
 
-- `--prefix "\@team:"`
+- `git-notify --prefix "@everyone"`
   - Change the prefix `git-notify` looks for in git commit messages
-  - You'll need to take care of escaping any special characters that may be interpreted by your shell, `!`, `@`, etc...
   - Default: `git-notifier:`
-- `--color "ff6f6f"`
-  - Change the color of the banner
-  - This can be one of the [`chalk` preset colors](https://www.npmjs.com/package/chalk#colors) or a HEX value. If using HEX value, you can either include or omit the leading `#` character.
-- `--simple`
+- `git-notify --color "#ff6f6f"`
+  - Change the color of the banner or message
+  - This can be one of the [`chalk` preset colors](https://www.npmjs.com/package/chalk#colors) or a hex value. Note that not all terminals support full hex color scales.
+- `git-notify --simple`
   - Instead of a fancy banner, displays a simple text message
 
 ### All parameters
@@ -104,7 +102,7 @@ npx git-notify --help
 
 ## About formatting
 
-`git-notify` will display a message for every "git-notify:" prefix it finds in the commit log that was just pulled/merged/rebased/checked out. **The notification message will be the rest of the paragraph following the prefix.** Whitespace will be preserved.
+`git-notify` will display a message for every "git-notify:" prefix it finds in the commit log that was just pulled/merged/rebased/checked out. **The notification message will be the rest of the paragraph following the prefix.**
 
 For example, this commit message:
 
@@ -122,7 +120,7 @@ Will print:
             ╘════════════════════════════╛
 ```
 
-Or:
+The message will be delimited by double line break. Single line breaks and other whitespace will be preserved. So that:
 
 ````
 Rewrite everything.
@@ -143,7 +141,14 @@ Will display:
          │     please contact Jeff at dev@null.com.     │
          │                                              │
          ╘══════════════════════════════════════════╛
+```
 
+You can run `git-notify since` to test configuration and dry-run the message you've just created locally. For example:
+
+```
+git commit -m '@team what's up??'
+npx git-notify since HEAD~1 --prefix "@team"
+```
 
 ### Can I group messages
 
