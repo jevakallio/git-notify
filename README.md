@@ -7,22 +7,27 @@
 
 Sometimes you need to communicate about important changes to other developers on your project. In a small team, a Slack message will probably do, but in larger teams and distributed organizations (such as open source projects), reaching everyone can be a pain.
 
-`git-notify` allows you to inject announcements into your git commit messages, and display them to other developers when they pull those commits to their machine.
+`git-notify` allows you to inject announcements into your git commit messages, and display them to other developers:
 
 ```sh
 git commit -m 'git-notify: NEW PERF TOOLING AVAILABLE ...'
 ```
 
 Later, at a machine far far away:
+
 ![Demo](docs/demo.gif)
+
+## Getting started
+
+Simply add `git-notify:` to your git commit messages, and the rest of that paragraph will be displayed when another developer pulls that commit.
 
 If you're using merge/squash commit strategy on GitHub, you can add them to the extended commit message when landing a PR:
 
 ![GitHub PR flow example](docs/github-example.png)
 
-## Getting started
+Next we'll show how to [install](#installation) `git-notify` to your `npm` (or `yarn`) based project.
 
-`git-notify` is intended for use in node-based projects.
+### Installation
 
 Install the git-notify package as a devDependency:
 
@@ -34,7 +39,7 @@ npm install --save-dev git-notify
 yarn add -D git-notify
 ```
 
-Next, we'll configure `git-notify` to run automatically when other developers pull commits that contain git messages. Below we show how to install them with the excellent [husky](https://github.com/typicode/husky) node library. For other approaches, see the [Git Hooks](#git-hooks) section.
+Next, we'll configure `git-notify` to run automatically when other developers pull commits that contain git messages. Below we show how to achieve this with the excellent [husky](https://github.com/typicode/husky) library. For other approaches, see the [Git Hooks](#git-hooks) section later in this document.
 
 ### Installing hooks with husky
 
