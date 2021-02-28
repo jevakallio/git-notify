@@ -14,6 +14,8 @@ git commit -m 'git-notify: NEW PERF TOOLING AVAILABLE ...'
 
 Later, at a machine far far away:
 
+<img src="https://github.com/jevakallio/git-notify/blob/master/docs/demo.gif?raw=true" alt="GitHub PR flow example"></img>
+
 ![Demo](docs/demo.gif)
 
 Simple as that.
@@ -24,7 +26,7 @@ Just add `"git-notify:"` to your git commit messages, and the rest of that parag
 
 If you're using merge/squash commit strategy on GitHub, you can add them to the extended commit message when landing a PR:
 
-![GitHub PR flow example](docs/github-example.png)
+<img src="https://github.com/jevakallio/git-notify/blob/master/docs/github-example.png?raw=true" alt="GitHub PR flow example"></img>
 
 Next we'll show how to install `git-notify` to your `npm` (or `yarn`) based project.
 

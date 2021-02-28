@@ -3,6 +3,18 @@
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "repository": "https://github.com/jevakallio/git-notify",
+  "description": "Communicate important updates to your team via git commit messages",
+  "contributors": [
+    "@jevakallio"
+  ],
+  "keywords": [
+    "git",
+    "hook",
+    "message",
+    "notify",
+    "husky"
+  ],
   "files": [
     "dist",
     "src"
@@ -23,7 +35,6 @@
     "analyze": "size-limit --why"
   },
   "dependencies": {
-    "@types/git-raw-commits": "^2.0.0",
     "boxen": "^5.0.0",
     "chalk": "^4.1.0",
     "git-raw-commits": "^2.0.10",
@@ -56,6 +67,7 @@
     }
   ],
   "devDependencies": {
+    "@types/git-raw-commits": "^2.0.0",
     "@size-limit/preset-small-lib": "^4.9.2",
     "husky": "^5.1.1",
     "size-limit": "^4.9.2",
