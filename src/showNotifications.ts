@@ -4,6 +4,10 @@ import detectNewline from 'detect-newline';
 import boxen from 'boxen';
 import chalk from 'chalk';
 
+/**
+ * Reads given stream of git log messages and prints
+ * out any lines prefixed with the git-notify tag
+ */
 export default async function showNotifications(
   messageStream: Stream.Readable,
   flags: Flags

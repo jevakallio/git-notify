@@ -1,17 +1,7 @@
-// import commits from 'git-raw-commits';
 import meow from 'meow';
 import showNotifications from './showNotifications';
-import { Lifecycle, Flags } from './types';
 import { getLogStream } from './git';
-
-async function hook(lifecycle: Lifecycle, args: string[], flags: Flags) {
-  // get all commit messages for the relevant revision range
-  // depending on which git hook / command was executed
-  const logs = await getLogStream(lifecycle, args);
-
-  // stream through logs and print any found notifications
-  showNotifications(logs, flags);
-}
+import { Lifecycle, Flags } from './types';
 
 const cli = meow(
   `
@@ -60,4 +50,19 @@ const cli = meow(
   }
 );
 
-hook(cli.input[0] as Lifecycle, cli.input.slice(1), cli.flags);
+async function hook(lifecycle: Lifecycle, args: string[], flags: Flags) {
+  // get all commit messages for the relevant revision range
+  // depending on which git hook / command was executed
+  const logs = await getLogStream(lifecycle, args);
+
+  // stream through logs and print any found notifications
+  showNotifications(logs, flags);
+}
+
+// first argument is the git hook method
+const lifecycle = cli.input[0] as Lifecycle;
+
+// rest of the positional args come from the git hook
+const gitHookArgs = cli.input.slice(1);
+
+hook(lifecycle, gitHookArgs, cli.flags);
