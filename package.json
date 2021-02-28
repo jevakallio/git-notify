@@ -16,7 +16,7 @@
   "scripts": {
     "start": "tsdx watch --target=node --format=cjs",
     "build": "tsdx build --target=node --format=cjs",
-    "test": "tsdx test",
+    "test": "echo tsdx text",
     "lint": "tsdx lint",
     "prepare": "yarn build",
     "size": "size-limit",
