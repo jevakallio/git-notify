@@ -20,17 +20,15 @@ Simple as that.
 
 ## How to use git-notify?
 
-Just add `"git-notify:"` to your git commit messages, and the rest of that paragraph will be displayed when another developer pulls that commit, or switches from a branch that does not contain that commit to one that does.
+Just add `"git-notify:"` to your git commit message, and anything that follows will be displayed when another developer pulls that commit, or switches from a branch that does not contain that commit to one that does.
 
-If you're using merge/squash commit strategy on GitHub, you can add them to the extended commit message when landing a PR:
+If you're using a merge or squash commit strategy on GitHub, you can also add them to the extended commit message when landing a PR:
 
 <img src="https://github.com/jevakallio/git-notify/blob/master/docs/github-example.png?raw=true" alt="GitHub PR flow example"></img>
 
-Next we'll show how to install `git-notify` to your `npm` (or `yarn`) based project.
-
 ## Getting Started
 
-Install the git-notify package as a devDependency:
+Install `git-notify` to your `npm` (or `yarn`) based project as a devDependency:
 
 ```bash
 # using npm
