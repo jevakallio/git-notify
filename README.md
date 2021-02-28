@@ -209,6 +209,10 @@ To do a one-off build, use `npm run build` or `yarn build`.
 
 To run tests, use `npm test` or `yarn test`.
 
+## Thanks
+
+Special thanks to [Sindre Sorhus](https://github.com/sindresorhus), whose excellent [meow](https://github.com/sindresorhus/meow), [boxen](https://github.com/sindresorhus/boxen) and [chalk](https://github.com/chalk/chalk) libraries make developing Node CLIs a breeze.
+
 ## LICENSE
 
 [MIT](LICENSE)
