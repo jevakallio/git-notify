@@ -4,7 +4,7 @@ _Communicate important updates to your team via git commit messages_.
 
 ## What is git-notify?
 
-Sometimes you need to communicate changes to other developers on your project. In a small team, a Slack message will probably do, but in larger teams and distributed organizations (such as open source projects), reaching everyone can be a pain.
+Sometimes you need to communicate changes to other developers on your project. In a small team, a Slack message works okay, but in larger teams and distributed organizations (such as open source projects), reaching everyone can be a pain.
 
 `git-notify` allows you to inject announcements into your git commit messages, and display them to other developers:
 
@@ -73,7 +73,7 @@ _**Note:** The above instructions below are for [husky v4.x](https://github.com/
 
 - `git-notify --prefix "@everyone"`
   - Change the prefix `git-notify` looks for in git commit messages
-  - Default: `git-notifier:`
+  - Default: `git-notify:`
 - `git-notify --color "#ff6f6f"`
   - Change the color of the banner or message
   - This can be one of the [`chalk` preset colors](https://www.npmjs.com/package/chalk#colors) or a hex value. Note that not all terminals support full hex color scales.
