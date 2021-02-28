@@ -120,32 +120,35 @@ Will print:
 
 ```
             ╒════════════════════════════╕
-            │                               │
-            │    Please run npm install     │
-            │                               │
+            │                            │
+            │  Please run npm install    │
+            │                            │
             ╘════════════════════════════╛
 ```
 
-The message will be delimited by double line break. Single line breaks and other whitespace will be preserved. So that:
+The message will run until the end of the paragraph, delimited by a double line break. Single line breaks and other whitespace will be preserved. So that:
 
-````
+```
 Rewrite everything.
 
 git-notify:EVERYTHING HAS CHANGED
 This project has been rewritten
 from scratch. If something broke,
 please contact Jeff at dev@null.com.
+
+May god please forgive me.
 ```
 
 Will display:
+
 ```
          ╒══════════════════════════════════════════╕
-         │                                              │
-         │            EVERYTHING HAS CHANGED            │
-         │       This project has been rewritten        │
-         │      from scratch. If something broke,       │
-         │     please contact Jeff at dev@null.com.     │
-         │                                              │
+         │                                          │
+         │          EVERYTHING HAS CHANGED          │
+         │     This project has been rewritten      │
+         │    from scratch. If something broke,     │
+         │   please contact Jeff at dev@null.com.   │
+         │                                          │
          ╘══════════════════════════════════════════╛
 ```
 
@@ -201,7 +204,7 @@ To run TSDX, use:
 
 ```bash
 yarn start
-````
+```
 
 This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
 
