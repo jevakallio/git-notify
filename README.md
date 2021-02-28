@@ -1,11 +1,10 @@
-<h1 align="center">git-notify</h1>
-<p align="center">
-<strong>Communicate important updates to your team via git commit messages</strong>
-<br><br>
+# git-notify
+
+_Communicate important updates to your team via git commit messages_.
 
 ## What is git-notify?
 
-Sometimes you need to communicate about important changes to other developers on your project. In a small team, a Slack message will probably do, but in larger teams and distributed organizations (such as open source projects), reaching everyone can be a pain.
+Sometimes you need to communicate changes to other developers on your project. In a small team, a Slack message will probably do, but in larger teams and distributed organizations (such as open source projects), reaching everyone can be a pain.
 
 `git-notify` allows you to inject announcements into your git commit messages, and display them to other developers:
 
