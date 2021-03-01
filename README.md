@@ -6,15 +6,15 @@ _Communicate important updates to your team via git commit messages_.
 
 Sometimes you need to communicate changes to other developers on your project. In a small team, a Slack message works okay, but in larger teams and distributed organizations (such as open source projects), reaching everyone can be a pain.
 
-`git-notify` allows you to inject announcements into your git commit messages, and display them to other developers:
+`git-notify` allows you to embed announcements into your git commit messages:
 
 ```sh
-git commit -m 'git-notify: NEW PERF TOOLING AVAILABLE ...'
+git commit -m 'git-notify: NEW DEVELOPMENT ENVIRONMENT ...'
 ```
 
-Later, at a machine far far away:
+And display them to another developer on a machine, far far away:
 
-<img src="https://github.com/jevakallio/git-notify/blob/master/docs/demo.gif?raw=true" alt="GitHub PR flow example"></img>
+<img src="https://raw.githubusercontent.com/jevakallio/git-notify/master/docs/demo_animated.gif" alt="Demo"></img>
 
 Simple as that.
 
