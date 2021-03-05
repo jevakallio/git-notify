@@ -188,7 +188,11 @@ See [githooks.com](https://githooks.com/) for more resources on the topic. Docum
 
 At this time, `git-notify` is a node-based project. While I recognize it could be useful in other types of projects (ruby, python, rust, etc...), cross-platform scripting sucks, and this project is not interested in solving those problems at this time.
 
-If you like this idea, feel free to steal it and implement your own version for other toolsets!
+However, the `git-notify` beviour has been implemented in other languages:
+
+- **PHP**: [Captain Hook](https://github.com/captainhookphp/captainhook)
+
+If you like this idea, feel free to steal it and implement your own version, and I'll add it here.
 
 ## Contributing
 
