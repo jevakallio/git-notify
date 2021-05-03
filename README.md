@@ -83,15 +83,15 @@ Configure `git-notify` hooks by adding the following entries to your `lefthook.y
 post-merge:
   commands:
     notify:
-      run: "git-notify merge {0}"
+      run: "npx git-notify merge {0}"
 post-rewrite:
   commands:
     notify:
-      run: "git-notify merge {0}"
+      run: "npx git-notify merge {0}"
 post-checkout:
   commands:
     notify:
-      run: "git-notify merge {0}"
+      run: "npx git-notify merge {0}"
 
 ```
 
