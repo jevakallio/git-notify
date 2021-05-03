@@ -38,7 +38,7 @@ npm install --save-dev git-notify
 yarn add -D git-notify
 ```
 
-Next, we'll configure `git-notify` to run automatically when other developers pull commits that contain git messages. Below we show how to achieve this with the excellent [husky](https://github.com/typicode/husky) library. For other approaches, see the [Git Hooks](#git-hooks) section later in this document.
+Next, we'll configure `git-notify` to run automatically when other developers pull commits that contain git messages. Below we show how to achieve this with the excellent [husky](https://github.com/typicode/husky) and [lefthook](https://github.com/evilmartians/lefthook#lefthook) libraries. For other approaches, see the [Git Hooks](#git-hooks) section later in this document.
 
 ### Installing hooks with husky
 
@@ -66,6 +66,34 @@ Configure `git-notify` hooks by adding the following `husky` entries to your `pa
 ```
 
 _**Note:** The above instructions below are for [husky v4.x](https://github.com/typicode/husky/tree/master). Husky v5 has changed how hooks are configured, as well updated its licensing terms to be free only to other open source projects.See [husky's own documentation](https://dev.to/typicode/what-s-new-in-husky-5-32g5) for how to configure hooks in their latest version._
+
+### Installing hooks with lefthook
+
+```
+# using npm
+npm install --save-dev @arkweid/lefthook
+
+# using yarn
+yarn add -D @arkweid/lefthook
+```
+
+Configure `git-notify` hooks by adding the following entries to your `lefthook.yml`:
+
+```yaml
+post-merge:
+  commands:
+    notify:
+      run: "npx git-notify merge {0}"
+post-rewrite:
+  commands:
+    notify:
+      run: "npx git-notify merge {0}"
+post-checkout:
+  commands:
+    notify:
+      run: "npx git-notify merge {0}"
+
+```
 
 ## Configuration
 
@@ -166,6 +194,10 @@ Not at the moment, but this should not be difficult to add. See [Contributing](#
 ### Installing with husky
 
 See [Installing hooks with husky](#installing-hooks-with-husky) in the Getting Started section.
+
+### Installing with lefthook
+
+See [Installing hooks with lefthook](#installing-hooks-with-lefthook) in the Getting Started section.
 
 ### Installing hooks by any other means
 
